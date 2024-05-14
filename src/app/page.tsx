@@ -14,7 +14,7 @@ export default function Home() {
 	const handleSubmission = async (institution: string, snippet: string) => {
     
 		const processingMessage = <text key={Date.now()} className="text-sm text-green-500">Processing your snippet...</text>
-		setOutputElements(prevElements => [...prevElements, processingMessage])
+		setOutputElements([processingMessage])
 		const result = await evaluateSnippet(snippet)
 		
 		if (result) {
@@ -26,12 +26,13 @@ export default function Home() {
 			return
     }
 
-		if (result && (result.rating || result.rating > 0)) {
+		if (result && (result.rating && result.rating > 3)) {
       const resultMessage = <text key={Date.now()} className="text-sm text-green-500">Adding snippet to training data set...</text>
 			setOutputElements(prevElements => [...prevElements, resultMessage])
     } else {
-			const errorMessage = <text key={Date.now()} className="text-sm text-green-500">Your snippet needs a rating of 1 or greater to be added.</text>
+			const errorMessage = <text key={Date.now()} className="text-sm text-green-500">Your snippet needs a rating of 4 or greater to be added.</text>
 			setOutputElements(prevElements => [...prevElements, errorMessage])
+			return
 		}
 
   }
