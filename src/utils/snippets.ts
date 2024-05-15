@@ -23,13 +23,21 @@ export const getRecentSnippetFromOthers = async (contributor: string, wordCount:
     const otherContributorsSnippets = snippets.filter(snippet => snippet.contributor !== contributor)
 
     // Find the most recent snippet with at least the specified word count
-    const suitableSnippet = otherContributorsSnippets
+    let suitableSnippet = otherContributorsSnippets
       .filter(snippet => snippet.wordCount >= wordCount)
       .sort((a, b) => b.timestamp - a.timestamp) // Sort by timestamp descending
       .find(() => true) // Get the first item after sorting
 
+    // If no suitable snippet is found, find the one with the most words
     if (!suitableSnippet) {
-      throw new Error('No suitable snippet found.')
+      suitableSnippet = otherContributorsSnippets
+        .sort((a, b) => b.wordCount - a.wordCount || b.timestamp - a.timestamp)
+        .find(() => true);
+    }
+
+    // Final check to throw an error if no snippet is found at all
+    if (!suitableSnippet) {
+      throw new Error('No suitable snippet found.');
     }
 
     // Return the snippet text truncated to the specified word count
