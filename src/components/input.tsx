@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({ institutions, onSubmit }) => {
       </div>
       <textarea
         placeholder="Enter snippet here"
-        className="p-2 border border-gray-300 rounded-md bg-black text-white text-sm w-full h-[300px]"
+        className="p-2 border border-gray-300 rounded-md bg-black text-white text-lg w-full h-[300px]"
         aria-label="Snippet Input"
         value={snippet}
         onChange={(e) => setSnippet(e.target.value)}
