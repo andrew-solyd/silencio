@@ -93,19 +93,26 @@ export default function Home() {
   return (
 		<>
 			<main className="flex min-h-screen flex-col items-center px-10">
-				<Header globalStats={globalStats} />
-				<div className="flex flex-row justify-center w-full mt-4 space-x-12">
-					<Input institutions={institutions} onSubmit={handleSubmission} />
-					<div className="w-[400px] flex flex-col">
-						{outputElements}
+				<div className="hidden sm:block">
+					<Header globalStats={globalStats} />
+					<div className="flex flex-row justify-center w-full mt-4 space-x-12">
+						<Input institutions={institutions} onSubmit={handleSubmission} />
+						<div className="w-[400px] flex flex-col">
+							{outputElements}
+						</div>
+					</div>
+					<div className="flex flex-col items-center">
+						<button className="mt-10 border-b border-gray-300 text-xs bg-transparent hover:text-gray-600 hover:border-gray-600" onClick={() => setIsAllSnippetsModalOpen(true)}>
+							View all snippets
+						</button>
+						<span className="text-xs text-gray-300 mt-3">
+							0x{contractAddress} (Mercato Testnet)
+						</span>	
 					</div>
 				</div>
-				<button className="mt-10 border-b border-gray-300 text-xs bg-transparent hover:text-gray-600 hover:border-gray-600" onClick={() => setIsAllSnippetsModalOpen(true)}>
-					View all snippets
-				</button>
-				<span className="text-xs text-gray-300 mt-3">
-					0x{contractAddress} (Mercato Testnet)
-					</span>	
+				<div className="mt-10 sm:hidden">
+					<span>Silencio is currently available on desktop only</span>
+				</div>
 			</main>
 			<WelcomeModal isOpen={isWelcomeModalOpen} onClose={() => setIsWelcomeModalOpen(false)} />
 			<RewardModal isOpen={isRewardModalOpen} onClose={() => setIsRewardModalOpen(false)} contributor={contributor} wordCount={wordCount}/>
