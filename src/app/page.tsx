@@ -106,7 +106,7 @@ export default function Home() {
 							View all snippets
 						</button>
 						<span className="text-xs text-gray-300 mt-3">
-							0x{contractAddress} (Mercato Testnet)
+							0x{contractAddress} (Mercata Testnet)
 						</span>	
 					</div>
 				</div>
