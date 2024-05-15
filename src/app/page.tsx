@@ -111,7 +111,7 @@ export default function Home() {
 					</div>
 				</div>
 				<div className="mt-2 sm:hidden text-center">
-					<span className="text-sm">Silencio is currently available on desktop only</span>
+					<span className="text-sm">Silencio is available on desktop only</span>
 				</div>
 			</main>
 			<WelcomeModal isOpen={isWelcomeModalOpen} onClose={() => setIsWelcomeModalOpen(false)} />

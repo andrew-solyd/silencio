@@ -12,7 +12,7 @@ const WelcomeModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50 sm:px-10">
       <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}></div>
       <div className="bg-zinc-950 text-white p-5 rounded-lg z-10 max-h-[80vh] overflow-auto">
-				<div className="flex flex-col sm:w-[500px] h-[500px] justify-between px-10">
+				<div className="flex flex-col sm:w-[500px] h-[500px] justify-between px-1 sm:px-10">
 					<h1 className="text-xl text-center mb-2 font-semibold">What is this?</h1>
 					<p>
 						Welcome to Silencio, a practical demonstration of using private blockchain for secure data sharing in AI model training. In this demo, consortium members contribute Shakespearean text segments, which are evaluated for quality and added to a shared data pool. Contributors are rewarded with access to matching datasets based on the quality and amount of their contributions.
