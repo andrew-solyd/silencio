@@ -21,13 +21,13 @@ contract SilencioSnippetStorage {
     // Function to add a snippet to the array
     function addSnippet(string memory _text, string memory _contributor, int _rating, int _wordCount) public {
 
-				Snippet memory newSnippet = Snippet({
-						text: _text,
-						timestamp: block.timestamp,
-						contributor: _contributor,
-						rating: _rating,
-						wordCount: _wordCount
-				});
+				Snippet memory newSnippet;
+
+				newSnippet.text = _text;
+				newSnippet.timestamp = block.timestamp;
+				newSnippet.contributor= _contributor;
+				newSnippet.rating = _rating;
+				newSnippet.wordCount = _wordCount;
 
 				snippets.push(newSnippet);
 			
@@ -43,11 +43,14 @@ contract SilencioSnippetStorage {
 
     }
 
-    // Function to return the entire array of snippets
-    function getAllSnippets() public view returns (Snippet[] memory) {
+     function getSnippetCount() public view returns (uint) {
+        return snippets.length;
+    }
 
-        return snippets;
-
+    function getSnippet(uint index) public view returns (string memory, uint256, string memory, int, int) {
+        require(index < snippets.length, "Index out of bounds");
+        Snippet memory s = snippets[index];
+        return (s.text, s.timestamp, s.contributor, s.rating, s.wordCount);
     }
 
     // Function to return the global word count and dataset rating
