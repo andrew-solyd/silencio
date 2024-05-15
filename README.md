@@ -42,6 +42,21 @@ To run the Silencio POC demo locally, follow these steps:
 4. Run the development server: `npm run dev`
 5. Open your browser and navigate to `http://localhost:3000`
 
+## Environment Variables
+
+The following environment variables need to be set up for the project to run correctly:
+
+- `NEXT_PUBLIC_CONTRACT_ADDRESS`: Address of the deployed smart contract on BlockApps network.
+- `NEXT_PUBLIC_CONTRACT_NAME`: Name of your deployed smart contract.
+- `OPENAI_API_KEY`: Your OpenAI API key for accessing the GPT model. 
+- `OPENAI_MODEL`: Name of the OpenAI GPT model for text evaluation.
+- `CLIENT_ID`: Blockapps Keycloak Client ID provided by BlockApps support upon registration.
+- `CLIENT_SECRET`: Blockapps Keycloak Client secret provided by BlockApps support upon registration
+- `USERNAME`: Your username for the BlockApps Mercata Testnet dashboard (sign up at https://marketplace.mercata-testnet2.blockapps.net/dashboard/).
+- `PASSWORD`: Your password for the BlockApps Mercata Testnet dashboard.
+
+Make sure to set these environment variables before running the application. You can use a `.env.local` file in development or configure them through your deployment platform's settings.
+
 ## Future Enhancements
 
 This POC demo serves as a starting point for the Silencio project. Some potential future enhancements include:
