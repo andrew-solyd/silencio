@@ -110,7 +110,7 @@ export default function Home() {
 						</span>	
 					</div>
 				</div>
-				<div className="mt-10 sm:hidden">
+				<div className="mt-2 sm:hidden">
 					<span>Silencio is currently available on desktop only</span>
 				</div>
 			</main>
