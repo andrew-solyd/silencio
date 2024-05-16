@@ -1,13 +1,11 @@
 import Image from 'next/image'
 
 interface HeaderProps {
-  globalStats: {
+  globalStats?: {
     totalWordCount: number
     datasetRating: number
   }
 }
-
-const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
 
 export default function Header({ globalStats }: HeaderProps) {
   return (
@@ -23,10 +21,10 @@ export default function Header({ globalStats }: HeaderProps) {
 				</div>
 				<div className="flex flex-col w-[300px] mt-10">
 					<span className="text-right">
-						Data word count: {globalStats.totalWordCount}
-					</span>	
+						Data word count: {globalStats ? globalStats.totalWordCount : 'Loading...'}
+					</span>  
 					<span className="text-right">
-						Data quality rating: {globalStats.datasetRating / 100}
+						Data quality rating: {globalStats ? (globalStats.datasetRating / 100).toFixed(2) : 'Loading...'}
 					</span>
 				</div>
 			</div>
