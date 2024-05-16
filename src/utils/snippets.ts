@@ -1,5 +1,13 @@
 import { getAllSnippets } from '@/services/blockapps'
 
+interface Snippet {
+  text: string;
+  timestamp: number;
+  contributor: string;
+  rating: number;
+  wordCount: number;
+}
+
 export const getRewardWordCount = (wordCount: number, rating: number): number => {
   let adjustedWordCount: number
 
@@ -16,8 +24,8 @@ export const getRewardWordCount = (wordCount: number, rating: number): number =>
 
 export const getRecentSnippetFromOthers = async (contributor: string, wordCount: number): Promise<{ text: string, contributor: string, timestamp: number }> => {
   try {
-    // Fetch all snippets from the blockchain
-    const snippets = await getAllSnippets()
+    // Fetch all snippets from the blockchain and assert the correct type
+    const snippets = await getAllSnippets() as Snippet[]
 
     // Filter out snippets from the specified contributor
     const otherContributorsSnippets = snippets.filter(snippet => snippet.contributor !== contributor)
@@ -32,12 +40,12 @@ export const getRecentSnippetFromOthers = async (contributor: string, wordCount:
     if (!suitableSnippet) {
       suitableSnippet = otherContributorsSnippets
         .sort((a, b) => b.wordCount - a.wordCount || b.timestamp - a.timestamp)
-        .find(() => true);
+        .find(() => true)
     }
 
     // Final check to throw an error if no snippet is found at all
     if (!suitableSnippet) {
-      throw new Error('No suitable snippet found.');
+      throw new Error('No suitable snippet found.')
     }
 
     // Return the snippet text truncated to the specified word count

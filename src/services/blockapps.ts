@@ -19,6 +19,14 @@ interface GlobalStats {
   datasetRating: number 
 }
 
+interface Snippet {
+  text: string;
+  timestamp: number;
+  contributor: string;
+  rating: number;
+  wordCount: number;
+}
+
 export const getGlobalStats = async (): Promise<GlobalStats> => {
   const tokenResponse = await getTokenFromKeycloak() 
   const url = 'https://marketplace.mercata-testnet2.blockapps.net/strato/v2.3/transaction?resolve=true' 
@@ -90,7 +98,7 @@ export const addSnippet = async (institution: string, snippet: string, rating: n
   }
 } 
 
-export const getAllSnippets = async () => {
+export const getAllSnippets = async (): Promise<Snippet[]> => {
   const tokenResponse = await getTokenFromKeycloak()
   const url = 'https://marketplace.mercata-testnet2.blockapps.net/strato/v2.3/transaction?resolve=true'
   const payload = {
@@ -121,7 +129,7 @@ export const getAllSnippets = async () => {
     const snippetCount = parseInt(countResponse.data[0].data.contents[0], 10)
 
     // Now fetch each snippet using a loop
-    let snippets = []
+    let snippets: Snippet[] = []
     for (let i = 0; i < snippetCount; i++) {
       payload.txs[0].payload.method = "getSnippet"
       payload.txs[0].payload.args = { index: i }
@@ -144,6 +152,6 @@ export const getAllSnippets = async () => {
     return snippets
   } catch (error) {
     console.error('Error fetching snippets:', error)
-    return ['Error fetching snippets. Please try again later.'] // Return a user-friendly error message in an array
+    throw new Error('Error fetching snippets. Please try again later.')
   }
 }
