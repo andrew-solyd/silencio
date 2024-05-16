@@ -82,10 +82,11 @@ export const addSnippet = async (institution: string, snippet: string, rating: n
   } 
 
   try {
-    const response = await axios.post(url, payload, { headers }) 
+    await axios.post(url, payload, { headers }) 
+    return "Snippet added successfully"
   } catch (error) {
     console.error('Error posting transaction to add snippet:', error) 
-    throw error 
+    return `Error adding snippet: ${error}`
   }
 } 
 
@@ -143,6 +144,6 @@ export const getAllSnippets = async () => {
     return snippets
   } catch (error) {
     console.error('Error fetching snippets:', error)
-    throw error
+    return ['Error fetching snippets. Please try again later.'] // Return a user-friendly error message in an array
   }
 }

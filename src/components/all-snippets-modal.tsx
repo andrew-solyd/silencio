@@ -24,7 +24,12 @@ const AllSnippetsModal: React.FC<AllSnippetsModalProps> = ({ isOpen, onClose }) 
       setIsLoading(true)
       try {
         const fetchedSnippets = await getAllSnippets()
-        setSnippets(fetchedSnippets)
+
+        if (fetchedSnippets.every(snippet => typeof snippet === 'object' && 'text' in snippet && 'timestamp' in snippet && 'contributor' in snippet && 'rating' in snippet && 'wordCount' in snippet)) {
+          setSnippets(fetchedSnippets as Snippet[])
+        } else {
+          setError('Invalid data format received')
+        }
       } catch (error: any) {
         setError('Failed to load snippets: ' + error.message)
       } finally {
